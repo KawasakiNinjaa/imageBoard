@@ -4,7 +4,52 @@
     <title></title>
 </head>
 <body>
+
+
+    <h1>dis is my cute imageboard xoxo</h1>
+
+    <div id="main">
+
+        <!-- all of the HTML here is linked or bound to VUE -->
+
+    <p>  {{ name }}  </p>
+    <!-- v-for stands for Vue-ForLoop: 'city' would be var i; aka every object in the array (cities). The second word in the value string must match the name of the array in the frintend JS  -->
+
+    <ul v-for = 'city in cities'>
+
+
+
+        <li>{{city.name}}, {{ city.country }} </li>
+
+
+
+
+    </ul>
+
+
+<p v-if= 'cities.length === 0'> no cities... :(</p>
+
+
+
+<h3 @click = 'myFn'> clickin' is fun ^^ </h3>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="js/script.js">
+
+    </script>
 </body>
 </html>
