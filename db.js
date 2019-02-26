@@ -5,7 +5,15 @@ const dbUrl =
   `postgres:postgres:postgres@localhost:5432/wintergreen-imageboard`;
 const db = spicedPg(dbUrl);
 
-exports.getImages = () => {
+exports.getImages = function getImages() {
   let q = "SELECT * FROM images";
   return db.query(q);
+};
+
+exports.uploadImg = function uploadImg(title, description, username, url) {
+  let q =
+    "INSERT INTO images (title, description, username, url) VALUES ($1, $2, $3, $4 )";
+  let params = [title, description, username, url];
+
+  return db.query(q, params);
 };

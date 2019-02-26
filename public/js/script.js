@@ -68,6 +68,7 @@
           console.log("SELF in then of axios", self);
           //runs once we recieved response from server
           self.images = resp.data;
+          console.log("data: ", resp.data);
           //self == this
         })
         .catch(function(err) {
@@ -87,7 +88,10 @@
         formData.append("username", this.form.username);
         formData.append("description", this.form.description);
 
-        axios.post("/upload", formData);
+        axios.post("/upload", formData).then(results => {
+          console.log("results: ", results.data[0]);
+          this.images.push(results.data[0]);
+        });
       },
 
       handleFileChange: function(e) {

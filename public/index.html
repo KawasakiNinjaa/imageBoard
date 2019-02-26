@@ -2,6 +2,7 @@
 <html>
 <head>
     <title></title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -23,16 +24,18 @@
         <input v-model= 'form.title' type="text" name="title" placeholder="title">
         <input v-moder= 'form.username' type="text" name="username" placeholder="username">
         <input v-model= 'form.description' type="text" name="description" placeholder= 'description'>
+        <br>
         <input type="file" accept="image/*" name="file" @change="handleFileChange">
-
+        <br>
+        <br>
         <button @click = 'uploadFile'> UPLOAD</button>
 
 
     </form>
-
+    <br>
     <div class = "images-container">
             <div v-for = 'image in images'>
-                <img :src = "image.url">
+                <img class ='whatever' :src = "image.url">
                 <p>{{ image.description }}</p>
             </div>
         </div>

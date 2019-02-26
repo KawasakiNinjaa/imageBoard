@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 
 const db = require("./db");
+const s3 = require("./s3");
 app.use(express.static("./public"));
 
 var multer = require("multer");
@@ -28,13 +29,25 @@ var uploader = multer({
   }
 });
 
-app.post("/upload", uploader.single("file"), function(req, res) {
+app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
   console.log("req.file ", req.file);
   console.log("req.body ", req.body);
   // If nothing went wrong the file is already in the uploads directory
+
   if (req.file) {
-    res.json({
-      success: true
+    //INSERT -- title, description, username, s3URL + filename
+    //for the image to appear on the page we need to change the array
+    let imgUrl = "https://s3.amazonaws.com/spicedling/" + req.file.filename;
+    let title = req.body.title;
+    let description = req.body.description;
+    let userName = req.body.username;
+
+    db.uploadImg(title, description, userName, imgUrl).then(results => {
+      res.json(results.rows);
+      // title: title,
+      // description: description,
+      // username: userName,
+      // url: imgUrl
     });
   } else {
     res.json({
