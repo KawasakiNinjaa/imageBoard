@@ -47,10 +47,54 @@
   new Vue({
     el: "#main",
 
-    data: {},
+    data: {
+      images: [],
+      form: {
+        title: "",
+        username: "",
+        description: "",
+        file: null
+      }
+    },
 
     mounted: function() {
-      axios.get();
+      console.log("vue instance has mounted!!!");
+      var self = this;
+
+      axios
+        .get("/images")
+        .then(function(resp) {
+          // console.log('response from server', resp.data);
+          console.log("SELF in then of axios", self);
+          //runs once we recieved response from server
+          self.images = resp.data;
+          //self == this
+        })
+        .catch(function(err) {
+          console.log("err", err);
+        });
+    },
+    methods: {
+      uploadFile: function(e) {
+        e.preventDefault();
+        console.log("upload file is running");
+
+        //we use formData bc we are working with files.
+        var formData = new FormData();
+
+        formData.append("file", this.form.file);
+        formData.append("title", this.form.title);
+        formData.append("username", this.form.username);
+        formData.append("description", this.form.description);
+
+        axios.post("/upload", formData);
+      },
+
+      handleFileChange: function(e) {
+        console.log("handleFileChange running!");
+
+        this.form.file = e.target.files[0];
+      }
     }
   });
 })();
