@@ -37,8 +37,21 @@
             <div v-for = 'image in images'>
                 <img class ='whatever' :src = "image.url">
                 <p>{{ image.description }}</p>
+
+
             </div>
         </div>
+
+<image-modal v-if="currentImage" :id="currentImage" @close="closeModal"></image-modal>
+
+<script id="modal-template" type="text/x-template">
+<div id="img-box">
+    <div v-on:click='closeModal'><h1>X</h1></div>
+
+    <h1></h1>
+    <p></p>
+</div>
+</script>
 
 
 

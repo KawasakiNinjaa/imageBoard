@@ -44,12 +44,28 @@
 //   });
 // })();
 (function() {
-  Vue.component("funky-chicken", {
+  Vue.component("image-modal", {
     //data is a Fn that returns an objct
     data: function() {
       return {
-        name: "Funky Chicken"
+        image: {}, // img and all its data(title, user,etc) loaded form db with corresponding id
+        comments: [], //uploaded from db
+        form: {
+          usercomment: "",
+          username: ""
+        }
       };
+    },
+    template: "#modal-template",
+    mounted: function() {
+      console.log("image-modal has mounted");
+
+      //axios.get()
+    },
+    methods: {
+      closeModal: function() {
+        this.$emit("close");
+      }
     }
   });
 
@@ -58,6 +74,7 @@
 
     data: {
       images: [],
+      currentImage: null,
       form: {
         title: "",
         username: "",
@@ -108,6 +125,10 @@
         console.log("handleFileChange running!");
 
         this.form.file = e.target.files[0];
+      },
+      openModal: function(e) {
+        console.log("e: ", e);
+        //this function will open the modal when clicking on on img
       }
     }
   });

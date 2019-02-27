@@ -17,3 +17,10 @@ exports.uploadImg = function uploadImg(title, description, username, url) {
 
   return db.query(q, params);
 };
+
+exports.getImgById = function getImgById(id) {
+  let q = "SELECT FROM images where id=$1";
+  let params = [id];
+
+  return db.query(q, params);
+};
