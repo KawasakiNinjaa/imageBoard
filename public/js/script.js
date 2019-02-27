@@ -44,6 +44,15 @@
 //   });
 // })();
 (function() {
+  Vue.component("funky-chicken", {
+    //data is a Fn that returns an objct
+    data: function() {
+      return {
+        name: "Funky Chicken"
+      };
+    }
+  });
+
   new Vue({
     el: "#main",
 
@@ -82,6 +91,7 @@
 
         //we use formData bc we are working with files.
         var formData = new FormData();
+        var self = this;
 
         formData.append("file", this.form.file);
         formData.append("title", this.form.title);
@@ -90,7 +100,7 @@
 
         axios.post("/upload", formData).then(results => {
           console.log("results: ", results.data[0]);
-          this.images.push(results.data[0]);
+          self.images.unshift(results.data[0]);
         });
       },
 

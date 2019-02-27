@@ -2,10 +2,12 @@
 // this is our server
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 
 const db = require("./db");
 const s3 = require("./s3");
 app.use(express.static("./public"));
+app.use(bodyParser.json());
 
 var multer = require("multer");
 var uidSafe = require("uid-safe");
