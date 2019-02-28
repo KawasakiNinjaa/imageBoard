@@ -16,9 +16,11 @@ div.images-container img {
 }
 
 #img-box {
-  position: absolute;
+  position: fixed;
+  overflow: inherit;
+  background-color: white;
   top: 0;
-  left: 30;
+  left: 30%;
   border: 1px solid black;
   border-radius: 15px;
 }

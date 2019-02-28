@@ -136,8 +136,9 @@
         this.currentImage = id;
         //this function will open the modal when clicking on on img
       },
-      closeModal: function() {
-        this.$emit("close");
+      closeModal: function(id) {
+        console.log("closing modal");
+        this.currentImage = null;
       }
     }
   });
