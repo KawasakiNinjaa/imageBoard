@@ -46,6 +46,7 @@
 (function() {
   Vue.component("image-modal", {
     //data is a Fn that returns an objct
+    props: ["id"],
     data: function() {
       return {
         image: {}, // img and all its data(title, user,etc) loaded form db with corresponding id
@@ -59,8 +60,12 @@
     template: "#modal-template",
     mounted: function() {
       console.log("image-modal has mounted");
-
-      //axios.get()
+      var self = this;
+      axios.get(`/single/image/${this.id}`).then(function(res) {
+        console.log("res: ", res);
+        console.log("self in then of axios component: ", self);
+        self.image = res.data[0];
+      });
     },
     methods: {
       closeModal: function() {
@@ -126,9 +131,13 @@
 
         this.form.file = e.target.files[0];
       },
-      openModal: function(e) {
-        console.log("e: ", e);
+      openModal: function(id) {
+        console.log("id: ", id);
+        this.currentImage = id;
         //this function will open the modal when clicking on on img
+      },
+      closeModal: function() {
+        this.$emit("close");
       }
     }
   });

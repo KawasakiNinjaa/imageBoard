@@ -14,3 +14,11 @@ div.images-container img {
   max-width: 20rem;
   max-height: 30rem;
 }
+
+#img-box {
+  position: absolute;
+  top: 0;
+  left: 30;
+  border: 1px solid black;
+  border-radius: 15px;
+}

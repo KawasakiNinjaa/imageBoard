@@ -64,6 +64,19 @@ app.get("/images", (req, res) => {
   });
 });
 
+app.get("/single/image/:id", (req, res) => {
+  console.log("hola");
+  console.log("id: ", req.params.id);
+  db.getImgById(req.params.id)
+    .then(results => {
+      console.log("results in single-image: ", results.rows);
+      res.json(results.rows);
+    })
+    .catch(err => {
+      console.log("err; ", err);
+    });
+});
+
 app.listen(8080, () => {
   console.log("LISTENING AF");
 });
