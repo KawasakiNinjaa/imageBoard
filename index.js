@@ -77,6 +77,34 @@ app.get("/single/image/:id", (req, res) => {
     });
 });
 
+app.post("/insert-comment", (req, res) => {
+  let userComment = req.body.usercomment;
+  let userName = req.body.username;
+  let imgID = req.body.id;
+
+  db.insertComment(userComment, userName, imgID)
+    .then(results => {
+      console.log("results in insertComment: ", results);
+      res.json(results);
+    })
+    .catch(err => {
+      console.log("error in insert-comment: ", err);
+    });
+});
+
+app.get("/get-comments", (req, res) => {
+  let imgID = req.body.id;
+
+  db.getComments(imgID)
+    .then(results => {
+      console.log("results in getComments: ", results);
+      res.json(results);
+    })
+    .catch(err => {
+      console.log("error in get-comments: ", err);
+    });
+});
+
 app.listen(8080, () => {
   console.log("LISTENING AF");
 });

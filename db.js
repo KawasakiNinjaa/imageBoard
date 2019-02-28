@@ -19,8 +19,23 @@ exports.uploadImg = function uploadImg(title, description, username, url) {
 };
 
 exports.getImgById = function getImgById(id) {
-  let q = "SELECT * FROM images where id=$1";
+  let q = "SELECT * FROM images WHERE id=$1";
   let params = [id];
+
+  return db.query(q, params);
+};
+
+exports.insertComment = function insertComment(comment, username, imgID) {
+  let q =
+    "INSERT INTO images(comment, username, img_id) VALUES ($1, $2, $3) RETURNING *";
+  let params = [comment, username, imgID];
+
+  return db.query(q, params);
+};
+
+exports.getComments = function getComments(imgID) {
+  let q = "SELECT comment FROM comments WHERE id=$1";
+  let params = [imgID];
 
   return db.query(q, params);
 };

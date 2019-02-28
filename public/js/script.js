@@ -67,6 +67,7 @@
         self.image = res.data[0];
       });
     },
+
     methods: {
       closeModal: function() {
         this.$emit("close");
