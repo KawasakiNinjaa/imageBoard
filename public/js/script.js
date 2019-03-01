@@ -60,12 +60,14 @@
     template: "#modal-template",
     mounted: function() {
       console.log("image-modal has mounted");
+      /////////////////////////// gets images
       var self = this;
       axios.get(`/single/image/${this.id}`).then(function(res) {
         console.log("res: ", res);
         console.log("self in then of axios component: ", self);
         self.image = res.data[0];
       });
+      //////////////////////// gets comments
       var self = this;
       console.log("self in get-comments: ", self);
       axios.get(`/get-comments/${this.id}`).then(function(res) {
@@ -165,6 +167,18 @@
       closeModal: function(id) {
         console.log("closing modal");
         this.currentImage = null;
+      },
+      loadMore: function(e) {
+        e.preventDefault();
+        var self = this;
+        console.log("images.lentgh: ", self.images[self.images.length - 1].id);
+        let imgID = self.images[self.images.length - 1].id;
+        axios.get(`/loadmore/${imgID}`).then(function(res) {
+          console.log("res in loadmore: ", res.data);
+          for (var i = 0; i < res.data.length; i++) {
+            self.images.push(res.data[i]);
+          }
+        });
       }
     }
   });

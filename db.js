@@ -6,8 +6,15 @@ const dbUrl =
 const db = spicedPg(dbUrl);
 
 exports.getImages = function getImages() {
-  let q = "SELECT * FROM images ORDER BY id DESC";
+  let q = "SELECT * FROM images ORDER BY id DESC LIMIT 9";
   return db.query(q);
+};
+
+exports.loadMore = function loadMore(imgID) {
+  let q = "SELECT * FROM images WHERE id < $1 ORDER BY id DESC LIMIT 5";
+  let params = [imgID];
+
+  return db.query(q, params);
 };
 
 exports.uploadImg = function uploadImg(title, description, username, url) {

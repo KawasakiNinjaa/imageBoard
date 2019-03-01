@@ -77,6 +77,13 @@ app.get("/single/image/:id", (req, res) => {
     });
 });
 
+app.get("/loadmore/:id", (req, res) => {
+  db.loadMore(req.params.id).then(results => {
+    console.log("results in loadmore: ", results.rows);
+    res.json(results.rows);
+  });
+});
+
 app.post("/insert-comment", (req, res) => {
   let userComment = req.body.usercomment;
   let userName = req.body.username;

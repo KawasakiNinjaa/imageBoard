@@ -34,6 +34,7 @@
             <p>{{ image.title }}</p>
         </div>
     </div>
+    <button @click= 'loadMore'> M O R E </button>
     <image-modal v-if="currentImage" :id="currentImage" @close="closeModal"></image-modal>
 </div>
 
