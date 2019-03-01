@@ -70,8 +70,9 @@
       console.log("self in get-comments: ", self);
       axios.get(`/get-comments/${this.id}`).then(function(res) {
         console.log("res in get-comments: ", res);
-        console.log("res.data: ", res.data.rows[0]);
-        self.comments = res.data.rows[0];
+        console.log("res.data: ", res.data.rows);
+        self.comments = res.data.rows.reverse();
+        console.log("self.comments: ", self.comments);
       });
     },
 
@@ -92,8 +93,8 @@
             id: self.id
           })
           .then(function(results) {
-            console.log("results in insert-comment: ", results);
-            self.comments = results.data.rows[0];
+            console.log("results in insert-comment: ", results.data.rows[0]);
+            self.comments.unshift(results.data.rows[0]);
           });
       }
     }
