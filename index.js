@@ -92,10 +92,10 @@ app.post("/insert-comment", (req, res) => {
     });
 });
 
-app.get("/get-comments", (req, res) => {
-  let imgID = req.body.id;
+app.get("/get-comments/:id", (req, res) => {
+  console.log("id in get-comments: ", req.params.id);
 
-  db.getComments(imgID)
+  db.getComments(req.params.id)
     .then(results => {
       console.log("results in getComments: ", results);
       res.json(results);
