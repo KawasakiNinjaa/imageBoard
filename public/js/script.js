@@ -61,16 +61,39 @@
     mounted: function() {
       console.log("image-modal has mounted");
       var self = this;
-      axios.get(`/single/image/${this.id}`).then(function(res) {
-        console.log("res: ", res);
-        console.log("self in then of axios component: ", self);
-        self.image = res.data[0];
-      });
+      axios
+        .get(`/single/image/${this.id}`)
+        .then(function(res) {
+          console.log("res: ", res);
+          console.log("self in then of axios component: ", self);
+          self.image = res.data[0];
+        })
+        .then(function() {
+          axios.get("/get-comments").then(function(res) {
+            console.log("res in get-comments: ", res);
+          });
+        });
     },
 
     methods: {
       closeModal: function() {
         this.$emit("close");
+      },
+      insertComment: function(e) {
+        console.log("I'm insertComment");
+        let self = this;
+        console.log("self in axios insertComment: ", self);
+        console.log("username: ", self.form.username);
+        e.preventDefault();
+        axios
+          .post("/insert-comment", {
+            usercomment: self.form.usercomment,
+            username: self.form.username,
+            id: self.id
+          })
+          .then(function(results) {
+            console.log("results in insert-comment: ", results);
+          });
       }
     }
   });

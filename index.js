@@ -81,7 +81,7 @@ app.post("/insert-comment", (req, res) => {
   let userComment = req.body.usercomment;
   let userName = req.body.username;
   let imgID = req.body.id;
-
+  console.log("body; ", req.body);
   db.insertComment(userComment, userName, imgID)
     .then(results => {
       console.log("results in insertComment: ", results);

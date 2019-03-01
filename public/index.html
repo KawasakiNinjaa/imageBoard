@@ -48,6 +48,7 @@
     <br>
     <input v-model= 'form.usercomment' type= "text" placeholder="Leave a comment here..."> </input>
     <input v-model= 'form.username' type= "text" placeholder="Your username"> </input>
+    <button @click=insertComment> insert comment </button>
     <div v-for ="comment in comments">
         <p> {{comment.comment }} </p>
 
