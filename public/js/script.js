@@ -106,6 +106,8 @@
     el: "#main",
 
     data: {
+      lastId: true,
+      showMoreButton: true,
       images: [],
       currentImage: null,
       form: {
@@ -126,8 +128,10 @@
           // console.log('response from server', resp.data);
           console.log("SELF in then of axios", self);
           //runs once we recieved response from server
-          self.images = resp.data;
           console.log("data: ", resp.data);
+          self.images = resp.data[0];
+          self.lastId = resp.data[1];
+          console.log("lastId: ", resp.data[1]);
           //self == this
         })
         .catch(function(err) {
@@ -175,6 +179,12 @@
         let imgID = self.images[self.images.length - 1].id;
         axios.get(`/loadmore/${imgID}`).then(function(res) {
           console.log("res in loadmore: ", res.data);
+          console.log("imgId: ", imgID, "self.lastId: ", self.lastId);
+          let wtf = res.data[res.data.length - 1].id;
+          if (wtf == self.lastId) {
+            self.showMoreButton = null;
+          }
+
           for (var i = 0; i < res.data.length; i++) {
             self.images.push(res.data[i]);
           }

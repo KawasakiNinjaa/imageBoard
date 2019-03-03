@@ -59,9 +59,14 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
 });
 
 app.get("/images", (req, res) => {
-  db.getImages().then(results => {
-    res.json(results.rows);
-  });
+  Promise.all([db.getImages(), db.getLastId()])
+    .then(([resGetImg, resLastId]) => {
+      console.log("resgetimg: ", resGetImg.rows, "reslastid: ", resLastId.rows);
+      res.json([resGetImg.rows, resLastId.rows[0].id]);
+    })
+    .catch(err => {
+      console.log("err in get images: ", err);
+    });
 });
 
 app.get("/single/image/:id", (req, res) => {

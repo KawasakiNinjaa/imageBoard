@@ -17,6 +17,12 @@ exports.loadMore = function loadMore(imgID) {
   return db.query(q, params);
 };
 
+exports.getLastId = function getLastId() {
+  let q = "SELECT id FROM images ORDER BY id ASC LIMIT 1";
+
+  return db.query(q);
+};
+
 exports.uploadImg = function uploadImg(title, description, username, url) {
   let q =
     "INSERT INTO images (title, description, username, url) VALUES ($1, $2, $3, $4) RETURNING *";
