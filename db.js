@@ -47,7 +47,7 @@ exports.insertComment = function insertComment(comment, username, imgID) {
 };
 
 exports.getComments = function getComments(imgID) {
-  let q = "SELECT comment FROM comments WHERE img_id=$1";
+  let q = "SELECT comment, username, created_at FROM comments WHERE img_id=$1";
   let params = [imgID];
 
   return db.query(q, params);

@@ -3,12 +3,13 @@
 <head>
     <title></title>
     <link href="https://fonts.googleapis.com/css?family=Paytone+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div id="titlediv">
-    <h1>it's Britney, memes</h1>
+    <h1> 👑 it's Britney, memes 👑</h1>
 </div>
 <!--    <div id="main">
         <!-- all of the HTML here is linked or bound to VUE -->
@@ -20,55 +21,71 @@
 </div> -->
 <div id="main">
     <div id="upload-form">
+        <img src="/assets/tenor.gif" alt="">
 
-    <form class="" action="index.html" method="post">
-        <input v-model= 'form.title' type="text" name="title" placeholder="title">
-        <input v-model= 'form.username' type="text" name="username" placeholder="username">
-        <input v-model= 'form.description' type="text" name="description" placeholder= 'description'>
-        <br>
-        <input type="file" accept="image/*" name="file" @change="handleFileChange">
-        <br>
-        <br>
-        <button @click = 'uploadFile'> UPLOAD</button>
+        <form class="" action="index.html" method="post">
+            <h3> &nbsp   &nbsp   &nbsp   &nbsp   &nbsp   &nbsp   S E N D  &nbsp   &nbsp   M E M E S  </h3>
+            <br>
+             <p> t i t l e </p>
+             <input v-model= 'form.title' type="text" name="title" placeholder="title">
+            <br>
+            <p>d e s c r i p t i o n </p>
+            <input v-model= 'form.description' type="text" name="description" placeholder= 'description'>
+            <br>
+            <p>u s e r n a m e </p>
+            <input v-model= 'form.username' type="text" name="username" placeholder="username">
+            <br>
+            <br>
+            <input type="file" accept="image/*" name="file" @change="handleFileChange">
+            <button @click = 'uploadFile'>u p l o a d</button>
     </form>
+    <img src="/assets/tenor.gif" alt="">
+
     </div>
     <br>
     <br>
     <br>
     <div class = "images-container">
         <div v-for = 'image in images' @click="openModal(image.id)">
-            <img :src = "image.url">
+            <img id="modalimage" :src = "image.url">
+            <br>
+            <br>
+            <br>
             <p>{{ image.title }}</p>
         </div>
     </div>
-    <button v-if="showMoreButton" @click= 'loadMore'> M O R E </button>
+    <button v-if="showMoreButton" @click= 'loadMore'> m + r e  </button>
     <image-modal v-if="currentImage" :id="currentImage" @close="closeModal"></image-modal>
 </div>
 
 <script id="modal-template" type="text/x-template">
 <div id="img-box">
     <div id="imginmodal" @click='closeModal(image.id)'><h1>c o m m e n t s </h1>
-    <img :src = "image.url" >
+        <img :src = "image.url" >
     </div>
-
-    <div id="commentsect">
-    <p> t i t l e </p>
-    <h2> {{ image.title }} </h2>
-    <p> d e s c r i p t i o n </p>
-    <h3> {{ image.description }} </h3>
-    <p> by: </p>
-    <p> {{ image.username }}, at {{ image.created_at}} </p>
-    <br>
-    <input v-model= 'form.usercomment' type= "text" placeholder="Leave a comment here..."> </input>
-    <input v-model= 'form.username' type= "text" placeholder="Your username"> </input>
-    <button @click=insertComment> insert comment </button>
-    <div v-for ="comment in comments">
-        <p> {{comment.comment }} </p>
+    <div id="commentbox">
+        <div id="commentsect">
+            <p> t i t l e </p>
+            <h2> {{ image.title }} </h2>
+            <p> d e s c r i p t i o n </p>
+            <h3> {{ image.description }} </h3>
+            <p> by: </p>
+            <p> {{ image.username }}, on {{ image.created_at}} </p>
+            <br>
+            <textarea v-model= 'form.usercomment' type= "text" placeholder="Leave a comment here..." rows="4" cols="50"> </textarea>
+            <br>
+            <input v-model= 'form.username' type= "text" placeholder="Your username"> </input>
+            <button @click=insertComment> insert comment </button>
+        </div>
+    <div id="showcomment" v-for ="comment in comments">
+        <p> {{comment.username}} commented: </p>
+        <p> "{{comment.comment }}" </p>
+        <br><br>
+         <p> on {{comment.created_at}} </p>
 
      </div>
  </div>
 
-</div>
 </script>
 
 
