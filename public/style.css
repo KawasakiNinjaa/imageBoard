@@ -7,6 +7,7 @@ div.images-container div {
   text-align: center;
   border: 1px solid black;
   border-radius: 15px;
+  overflow: hidden;
 }
 
 div.images-container img {
@@ -17,10 +18,36 @@ div.images-container img {
 
 #img-box {
   position: fixed;
-  overflow: inherit;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
   background-color: white;
   top: 0;
   left: 30%;
   border: 1px solid black;
   border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+#img-box .img {
+  max-height: 500px;
+}
+
+h1 {
+  font-family: "Paytone One", sans-serif;
+  color: DeepPink;
+  font-size: 50px;
+}
+
+#titlediv {
+  position: inline-block;
+}
+
+#upload-form {
+  position: inline-block;
+  float: right;
+  background-color: peachpuff;
+  padding-bottom: 30px;
+  margin-bottom: 50px;
+  border: dotted 1px rebeccapurple;
 }

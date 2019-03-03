@@ -2,12 +2,14 @@
 <html>
 <head>
     <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Paytone+One" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-
-    <h1>dis is my cute imageboard xoxo</h1>
+<div id="titlediv">
+    <h1>it's Britney, memes</h1>
+</div>
 <!--    <div id="main">
         <!-- all of the HTML here is linked or bound to VUE -->
 <!--    <p>  {{ name }}  </p> -->
@@ -17,6 +19,8 @@
     <h3 @click = 'myFn'> clickin' is fun ^^ </h3>
 </div> -->
 <div id="main">
+    <div id="upload-form">
+
     <form class="" action="index.html" method="post">
         <input v-model= 'form.title' type="text" name="title" placeholder="title">
         <input v-model= 'form.username' type="text" name="username" placeholder="username">
@@ -27,6 +31,9 @@
         <br>
         <button @click = 'uploadFile'> UPLOAD</button>
     </form>
+    </div>
+    <br>
+    <br>
     <br>
     <div class = "images-container">
         <div v-for = 'image in images' @click="openModal(image.id)">
@@ -40,12 +47,17 @@
 
 <script id="modal-template" type="text/x-template">
 <div id="img-box">
-    <div @click='closeModal(image.id)'><h1>c o m m e n t s </h1>
+    <div id="imginmodal" @click='closeModal(image.id)'><h1>c o m m e n t s </h1>
     <img :src = "image.url" >
     </div>
-    <h1> {{ image.title }} </h1>
+
+    <div id="commentsect">
+    <p> t i t l e </p>
+    <h2> {{ image.title }} </h2>
+    <p> d e s c r i p t i o n </p>
     <h3> {{ image.description }} </h3>
-    <p> {{ image.username }}, {{ image.created_at}} </p>
+    <p> by: </p>
+    <p> {{ image.username }}, at {{ image.created_at}} </p>
     <br>
     <input v-model= 'form.usercomment' type= "text" placeholder="Leave a comment here..."> </input>
     <input v-model= 'form.username' type= "text" placeholder="Your username"> </input>
@@ -54,6 +66,7 @@
         <p> {{comment.comment }} </p>
 
      </div>
+ </div>
 
 </div>
 </script>
