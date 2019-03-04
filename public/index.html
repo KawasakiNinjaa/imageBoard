@@ -23,8 +23,8 @@
     <div id="upload-form">
         <img src="/assets/tenor.gif" alt="">
 
-        <form class="" action="index.html" method="post">
-            <h3> &nbsp   &nbsp   &nbsp   &nbsp   &nbsp   &nbsp   S E N D  &nbsp   &nbsp   M E M E S  </h3>
+        <form class="header" action="index.html" method="post">
+            <h3> &nbsp   &nbsp      S E N D  &nbsp   &nbsp   M E M E S  </h3>
             <br>
              <p> t i t l e </p>
              <input v-model= 'form.title' type="text" name="title" placeholder="title">
@@ -36,7 +36,13 @@
             <input v-model= 'form.username' type="text" name="username" placeholder="username">
             <br>
             <br>
-            <input type="file" accept="image/*" name="file" @change="handleFileChange">
+                <div class="upload-btn-wrapper">
+
+                    <input type="file" accept="image/*" name="file" @change="handleFileChange">
+
+                    <button class="btn" type="button" name="button"> select file </button>
+                </div>
+
             <button @click = 'uploadFile'>u p l o a d</button>
     </form>
     <img src="/assets/tenor.gif" alt="">
