@@ -97,6 +97,8 @@
           .then(function(results) {
             console.log("results in insert-comment: ", results.data.rows[0]);
             self.comments.unshift(results.data.rows[0]);
+            self.form.usercomment = "";
+            self.form.username = "";
           });
       }
     }
@@ -155,6 +157,10 @@
         axios.post("/upload", formData).then(results => {
           console.log("results: ", results.data[0]);
           self.images.unshift(results.data[0]);
+          self.form.title = "";
+          self.form.description = "";
+          self.form.username = "";
+          self.form.file = "";
         });
       },
 

@@ -51,7 +51,7 @@
             <br>
             <br>
             <br>
-            <p>{{ image.title }}</p>
+            <p><b>{{ image.title }}</b></p>
         </div>
     </div>
     <button v-if="showMoreButton" @click= 'loadMore'> m + r e  </button>
@@ -61,7 +61,7 @@
 <script id="modal-template" type="text/x-template">
 <div id="img-box">
     <div id="imginmodal" @click='closeModal(image.id)'><h1>c o m m e n t s </h1>
-        <img :src = "image.url" >
+        <img class="popupimg" :src = "image.url" >
     </div>
     <div id="commentbox">
         <div id="commentsect">
@@ -78,10 +78,11 @@
             <button @click=insertComment> insert comment </button>
         </div>
     <div id="showcomment" v-for ="comment in comments">
-        <p> {{comment.username}} commented: </p>
-        <p> "{{comment.comment }}" </p>
+        <p> <b> {{comment.username}}</b> commented: </p>
+        <br>
+        <p> <b>"{{comment.comment }}" <b> </p>
         <br><br>
-         <p> on {{comment.created_at}} </p>
+         <p> on <i>{{comment.created_at}}</i> </p>
 
      </div>
  </div>

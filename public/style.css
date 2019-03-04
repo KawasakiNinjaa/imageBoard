@@ -173,3 +173,6 @@ button {
   box-shadow: 0 0.2em gray;
   cursor: pointer;
 }
+.popupimg {
+  max-width: 80%;
+}
